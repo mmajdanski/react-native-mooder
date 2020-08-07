@@ -1,21 +1,43 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import Colors from "./constants/colors";
+import CustomButton from "./components/button";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <>
+      <View style={styles.primaryDiv}>
+        <CustomButton />
+      </View>
+      <View style={styles.secondaryDiv}></View>
+      <View style={styles.thirdDiv}></View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  primaryDiv: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: Colors.primary,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  secondaryDiv: {
+    flex: 1,
+    backgroundColor: Colors.secondary,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  thirdDiv: {
+    flex: 1,
+    backgroundColor: Colors.primaryText,
+  },
+  fourthDiv: {
+    borderColor: "black",
+    borderRadius: 40,
+    padding: 15,
+    width: 200,
+    backgroundColor: Colors.testing,
+    justifyContent: "center",
   },
 });
