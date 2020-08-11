@@ -1,18 +1,101 @@
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Colors from "./constants/colors";
-import CustomButton from "./components/button";
+import GameStart from "./screens/gameStart";
+import GameQuestions from "./screens/gameQuestion";
+import Question from "./interfaces/question";
 
 export default function App() {
-  return (
-    <>
-      <View style={styles.primaryDiv}>
-        <CustomButton />
-      </View>
-      <View style={styles.secondaryDiv}></View>
-      <View style={styles.thirdDiv}></View>
-    </>
-  );
+  const [currentScreen, setCurrentScreen] = useState(0);
+  const [questions, setQuestions] = useState<Question[]>([
+    {
+      questionText: "Test Question #1",
+      questionChoices: [
+        {
+          questionChoiceText: "Question Choice #1 may be this long",
+          questionChoiceValue: 5,
+        },
+        {
+          questionChoiceText: "Question Choice #2 may be this long",
+          questionChoiceValue: 10,
+        },
+        {
+          questionChoiceText: "Question Choice #3 may be this long",
+          questionChoiceValue: 15,
+        },
+      ],
+    },
+    {
+      questionText: "Test Question #2",
+      questionChoices: [
+        {
+          questionChoiceText: "DIFF Question Choice #1 may be this long",
+          questionChoiceValue: 50,
+        },
+        {
+          questionChoiceText: "DIFF Question Choice #2 may be this long",
+          questionChoiceValue: 100,
+        },
+        {
+          questionChoiceText: "DIFF Question Choice #3 may be this long",
+          questionChoiceValue: 150,
+        },
+      ],
+    },
+  ]);
+
+  // const questions: Array<Question> = [
+  //   {
+  //     questionText: "Test Question #1",
+  //     questionChoices: [
+  //       {
+  //         questionChoiceText: "Question Choice #1 may be this long",
+  //         questionChoiceValue: 5,
+  //       },
+  //       {
+  //         questionChoiceText: "Question Choice #2 may be this long",
+  //         questionChoiceValue: 10,
+  //       },
+  //       {
+  //         questionChoiceText: "Question Choice #3 may be this long",
+  //         questionChoiceValue: 15,
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     questionText: "Test Question #2",
+  //     questionChoices: [
+  //       {
+  //         questionChoiceText: "DIFF Question Choice #1 may be this long",
+  //         questionChoiceValue: 50,
+  //       },
+  //       {
+  //         questionChoiceText: "DIFF Question Choice #2 may be this long",
+  //         questionChoiceValue: 100,
+  //       },
+  //       {
+  //         questionChoiceText: "DIFF Question Choice #3 may be this long",
+  //         questionChoiceValue: 150,
+  //       },
+  //     ],
+  //   },
+  // ];
+
+  const handleChangeScreen = (numScreen: number) => {
+    setCurrentScreen(numScreen);
+  };
+
+  const screenRenderer = () => {
+    if (currentScreen === 0) {
+      return <GameStart manageScreen={handleChangeScreen} />;
+    } else if (currentScreen === 1) {
+      return (
+        <GameQuestions questions={questions} setQuestions={setQuestions} />
+      );
+    }
+  };
+
+  return screenRenderer();
 }
 
 const styles = StyleSheet.create({
