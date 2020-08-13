@@ -22,8 +22,11 @@ export default function GameQuestions(props: Props) {
             textStyle={styles.questionChoiceText}
             key={questionChoice.questionChoiceText}
             onClick={() => {
-              props.questions[currentQuestionIndex].questionAnswer
-              props.setQuestions([...props.questions, ...props.questions[currentQuestionIndex].questionAnswer: "TestAnswer"])
+              let newQuestions = [...props.questions];
+              newQuestions[currentQuestionIndex].questionAnswer = "Test";
+              props.setQuestions(newQuestions); //State is updated
+              setCurrentQustionIndex(currentQuestionIndex + 1);
+              setCurrentQuestion(props.questions[currentQuestionIndex + 1]);
             }}
           >
             {questionChoice.questionChoiceText}
