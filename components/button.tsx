@@ -18,8 +18,9 @@ interface Props {
 
 export default function CustomButton(props: Props) {
   useEffect(() => {
-    console.log("Console logging all props for a CustomButton Rendered");
-    console.log(props);
+    // console.log("Console logging all props for a CustomButton Rendered");
+    // console.log(props);
+    //Above was used for testing only
   }, []);
 
   return (

@@ -5,4 +5,5 @@ export default interface Question {
     questionChoiceValue: number;
   }>;
   questionAnswer?: string;
+  questionAnswerValue?: number;
 }

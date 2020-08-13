@@ -4,6 +4,7 @@ import Colors from "./constants/colors";
 import GameStart from "./screens/gameStart";
 import GameQuestions from "./screens/gameQuestion";
 import Question from "./interfaces/question";
+import GameResult from "./screens/gameResult";
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState(0);
@@ -90,8 +91,14 @@ export default function App() {
       return <GameStart manageScreen={handleChangeScreen} />;
     } else if (currentScreen === 1) {
       return (
-        <GameQuestions questions={questions} setQuestions={setQuestions} />
+        <GameQuestions
+          questions={questions}
+          setQuestions={setQuestions}
+          manageScreen={handleChangeScreen}
+        />
       );
+    } else if (currentScreen === 2) {
+      return <GameResult questions={questions} />;
     }
   };
 

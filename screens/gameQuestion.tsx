@@ -7,6 +7,7 @@ import CustomButton from "../components/button";
 interface Props {
   questions: Array<Question>;
   setQuestions: React.Dispatch<React.SetStateAction<Question[]>>;
+  manageScreen: (numScreen: number) => void;
 }
 
 export default function GameQuestions(props: Props) {
@@ -23,10 +24,17 @@ export default function GameQuestions(props: Props) {
             key={questionChoice.questionChoiceText}
             onClick={() => {
               let newQuestions = [...props.questions];
-              newQuestions[currentQuestionIndex].questionAnswer = "Test";
+              newQuestions[currentQuestionIndex].questionAnswer =
+                questionChoice.questionChoiceText;
+              newQuestions[currentQuestionIndex].questionAnswerValue =
+                questionChoice.questionChoiceValue;
               props.setQuestions(newQuestions); //State is updated
-              setCurrentQustionIndex(currentQuestionIndex + 1);
-              setCurrentQuestion(props.questions[currentQuestionIndex + 1]);
+              if (currentQuestionIndex < newQuestions.length - 1) {
+                setCurrentQustionIndex(currentQuestionIndex + 1);
+                setCurrentQuestion(props.questions[currentQuestionIndex + 1]);
+              } else {
+                props.manageScreen(2);
+              }
             }}
           >
             {questionChoice.questionChoiceText}
