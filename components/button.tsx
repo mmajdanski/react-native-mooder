@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TouchableOpacity,
-  ViewStyle,
-  TextStyle,
-} from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity, ViewStyle, TextStyle } from "react-native";
 import Colors from "../constants/colors";
 
 interface Props {
@@ -26,9 +19,7 @@ export default function CustomButton(props: Props) {
   return (
     <TouchableOpacity onPress={props.onClick}>
       <View style={{ ...styles.button, ...props.buttonStyle }}>
-        <Text style={{ ...styles.buttonText, ...props.textStyle }}>
-          {props.children}
-        </Text>
+        <Text style={{ ...styles.buttonText, ...props.textStyle }}>{props.children}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -41,7 +32,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 20,
     width: 150,
-    backgroundColor: Colors.testing,
+    backgroundColor: Colors.buttonSecondary,
     justifyContent: "center",
     alignSelf: "center",
   },

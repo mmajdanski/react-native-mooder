@@ -22,10 +22,7 @@ export default function GameStart(props: Props) {
         <Text style={styles.appIntro}>It's time to Check In!</Text>
       </View>
 
-      <CustomButton
-        onClick={startQuizHandler}
-        buttonStyle={styles.customStartButton}
-      >
+      <CustomButton onClick={startQuizHandler} buttonStyle={styles.customStartButton}>
         Start
       </CustomButton>
     </View>
@@ -65,6 +62,6 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   customStartButton: {
-    backgroundColor: "orange",
+    backgroundColor: Colors.buttonSecondary,
   },
 });

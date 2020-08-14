@@ -80,6 +80,7 @@ const styles = StyleSheet.create({
   },
   questionChoiceButtons: {
     width: 300,
+    backgroundColor: Colors.secondary,
   },
   questionChoiceText: {
     fontSize: 22,

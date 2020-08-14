@@ -3,5 +3,5 @@ export default {
   secondary: "#888FB6",
   primaryText: "white",
   secondaryText: "#888FB6",
-  testing: "#8CC7A1",
+  buttonSecondary: "#00C49A",
 };

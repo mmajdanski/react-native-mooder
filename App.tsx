@@ -7,8 +7,7 @@ import Question from "./interfaces/question";
 import GameResult from "./screens/gameResult";
 
 export default function App() {
-  const [currentScreen, setCurrentScreen] = useState(0);
-  const [questions, setQuestions] = useState<Question[]>([
+  const questionsArray: Array<Question> = [
     {
       questionText: "Test Question #1",
       questionChoices: [
@@ -43,44 +42,15 @@ export default function App() {
         },
       ],
     },
-  ]);
+  ];
 
-  // const questions: Array<Question> = [
-  //   {
-  //     questionText: "Test Question #1",
-  //     questionChoices: [
-  //       {
-  //         questionChoiceText: "Question Choice #1 may be this long",
-  //         questionChoiceValue: 5,
-  //       },
-  //       {
-  //         questionChoiceText: "Question Choice #2 may be this long",
-  //         questionChoiceValue: 10,
-  //       },
-  //       {
-  //         questionChoiceText: "Question Choice #3 may be this long",
-  //         questionChoiceValue: 15,
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     questionText: "Test Question #2",
-  //     questionChoices: [
-  //       {
-  //         questionChoiceText: "DIFF Question Choice #1 may be this long",
-  //         questionChoiceValue: 50,
-  //       },
-  //       {
-  //         questionChoiceText: "DIFF Question Choice #2 may be this long",
-  //         questionChoiceValue: 100,
-  //       },
-  //       {
-  //         questionChoiceText: "DIFF Question Choice #3 may be this long",
-  //         questionChoiceValue: 150,
-  //       },
-  //     ],
-  //   },
-  // ];
+  const [currentScreen, setCurrentScreen] = useState(0);
+  const [questions, setQuestions] = useState<Question[]>(questionsArray);
+
+  const resetQuiz = () => {
+    setQuestions(questionsArray);
+    handleChangeScreen(0);
+  };
 
   const handleChangeScreen = (numScreen: number) => {
     setCurrentScreen(numScreen);
@@ -90,15 +60,9 @@ export default function App() {
     if (currentScreen === 0) {
       return <GameStart manageScreen={handleChangeScreen} />;
     } else if (currentScreen === 1) {
-      return (
-        <GameQuestions
-          questions={questions}
-          setQuestions={setQuestions}
-          manageScreen={handleChangeScreen}
-        />
-      );
+      return <GameQuestions questions={questions} setQuestions={setQuestions} manageScreen={handleChangeScreen} />;
     } else if (currentScreen === 2) {
-      return <GameResult questions={questions} />;
+      return <GameResult questions={questions} resetQuiz={resetQuiz} />;
     }
   };
 
@@ -127,7 +91,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
     padding: 15,
     width: 200,
-    backgroundColor: Colors.testing,
+    backgroundColor: Colors.buttonSecondary,
     justifyContent: "center",
   },
 });
