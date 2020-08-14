@@ -31,9 +31,8 @@ export default function GameQuestions(props: Props) {
 
             //If there are more questions
             if (currentQuestionIndex < props.questions.length - 1) {
-              //Update the question Index
+              //Update the question Index, Update the currentQuestion
               setCurrentQustionIndex(currentQuestionIndex + 1);
-              //Update the currentQuestion
               setCurrentQuestion(props.questions[currentQuestionIndex + 1]);
             } else {
               //Change to Result screen, there are no more questions
