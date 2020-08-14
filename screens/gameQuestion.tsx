@@ -14,53 +14,37 @@ export default function GameQuestions(props: Props) {
   const [currentQuestionIndex, setCurrentQustionIndex] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState(props.questions[0]);
 
-  const setQuestionAnswers = (questionChoice: {
-    questionChoiceText: string;
-    questionChoiceValue: number;
-  }) => {
-    return props.questions.map((question, index) => {
-      if (index !== currentQuestionIndex) {
-        return question; //This is not the question we are updating so just return it
-      }
-
-      //This is the question we are updating, so modify it
-      return {
-        ...question,
-        questionAnswer: questionChoice.questionChoiceText,
-        questionAnswerValue: questionChoice.questionChoiceValue,
-      };
-    });
-  };
-
   const populateQuestionOptions = () => {
-    return props.questions[currentQuestionIndex].questionChoices.map(
-      (questionChoice) => {
-        return (
-          <CustomButton
-            buttonStyle={styles.questionChoiceButtons}
-            textStyle={styles.questionChoiceText}
-            key={questionChoice.questionChoiceText}
-            onClick={() => {
-              //Update our state
-              props.setQuestions(setQuestionAnswers(questionChoice));
+    return props.questions[currentQuestionIndex].questionChoices.map((questionChoice) => {
+      return (
+        <CustomButton
+          buttonStyle={styles.questionChoiceButtons}
+          textStyle={styles.questionChoiceText}
+          key={questionChoice.questionChoiceText}
+          onClick={() => {
+            const newQuestions = [...props.questions];
+            newQuestions[currentQuestionIndex].questionAnswer = questionChoice.questionChoiceText;
+            newQuestions[currentQuestionIndex].questionAnswerValue = questionChoice.questionChoiceValue;
 
-              //If there are more questions
-              if (currentQuestionIndex < props.questions.length - 1) {
-                //Update the question Index
-                setCurrentQustionIndex(currentQuestionIndex + 1);
-                //Update the currentQuestion
-                setCurrentQuestion(props.questions[currentQuestionIndex + 1]);
-              } else {
-                //Change to Result screen, there are no more questions
-                props.manageScreen(2);
-              }
-            }}
-          >
-            {questionChoice.questionChoiceText}
-          </CustomButton>
-        );
-      }
-    );
+            //Update our state
+            props.setQuestions(newQuestions);
+
+            //If there are more questions
+            if (currentQuestionIndex < props.questions.length - 1) {
+              //Update the question Index
+              setCurrentQustionIndex(currentQuestionIndex + 1);
+              //Update the currentQuestion
+              setCurrentQuestion(props.questions[currentQuestionIndex + 1]);
+            } else {
+              //Change to Result screen, there are no more questions
+              props.manageScreen(2);
+            }
+          }}
+        >
+          {questionChoice.questionChoiceText}
+        </CustomButton>
+      );
+    });
   };
 
   return (
@@ -68,9 +52,7 @@ export default function GameQuestions(props: Props) {
       <View style={styles.questionTextContainer}>
         <Text style={styles.questionText}>{currentQuestion.questionText}</Text>
       </View>
-      <View style={styles.questionChoicesContainer}>
-        {populateQuestionOptions()}
-      </View>
+      <View style={styles.questionChoicesContainer}>{populateQuestionOptions()}</View>
     </View>
   );
 }
