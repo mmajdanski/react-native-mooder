@@ -46,8 +46,21 @@ export default function GameQuestions(props: Props) {
     });
   };
 
+  const widthOfProgresBar = () => {
+    let value = ((currentQuestionIndex + 1) / props.questions.length) * 100 + "%";
+    return value;
+  };
+
   return (
     <View style={styles.container}>
+      <View style={styles.questionProgressContainer}>
+        <Text style={styles.questionProgressContainerText}>
+          Question {currentQuestionIndex + 1}/{props.questions.length}
+        </Text>
+        <View style={styles.questionProgressBarContainer}>
+          <View style={{ ...styles.questionProgressBarContainerFill, width: widthOfProgresBar() }}></View>
+        </View>
+      </View>
       <View style={styles.questionTextContainer}>
         <Text style={styles.questionText}>{currentQuestion.questionText}</Text>
       </View>
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   questionChoicesContainer: {
-    flex: 1,
+    flex: 2,
     //alignItems: "center",
     justifyContent: "center",
   },
@@ -77,13 +90,41 @@ const styles = StyleSheet.create({
   questionText: {
     fontSize: 40,
     color: Colors.primaryText,
+    marginHorizontal: 10,
+    textAlign: "center",
   },
   questionChoiceButtons: {
-    width: 300,
-    backgroundColor: Colors.secondary,
+    width: "80%",
+    backgroundColor: Colors.primary,
+    borderRadius: 0,
+    borderWidth: 2,
+    borderColor: "white",
   },
   questionChoiceText: {
     fontSize: 22,
     color: Colors.primaryText,
+  },
+  questionProgressContainer: {
+    flexDirection: "row",
+    width: "85%",
+    marginTop: 50,
+    marginHorizontal: 20,
+  },
+  questionProgressContainerText: {
+    fontSize: 24,
+    color: Colors.primaryText,
+  },
+  questionProgressBarContainer: {
+    marginLeft: 20,
+    flexGrow: 5,
+    borderWidth: 2,
+    borderColor: "white",
+    borderRadius: 20,
+  },
+  questionProgressBarContainerFill: {
+    flex: 1,
+    color: "green",
+    backgroundColor: "green",
+    borderRadius: 20,
   },
 });
